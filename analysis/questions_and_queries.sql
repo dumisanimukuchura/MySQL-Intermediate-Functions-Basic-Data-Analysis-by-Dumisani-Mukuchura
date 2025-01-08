@@ -49,3 +49,40 @@ JOIN employee_salary AS sal2
 	ON sal1.dept_id = sal2.dept_id AND sal1.employee_id != sal2.employee_id
 JOIN parks_departments AS pd 
 	ON sal1.dept_id = pd.department_id;
+    
+-- 2 Unions (UNION DISTINCT, UNION ALL)
+
+/*
+Definitions:
+UNION DISTINCT: Combines rows from two queries, removing duplicates.
+UNION ALL: Combines rows from two queries, keeping duplicates.
+
+Questions
+2.1 Combine the first names of employees from both employee_demographics and employee_salary tables.
+2.2 Retrieve all unique department names from both parks_departments and employee_salary.
+2.3 List all employee IDs from employee_demographics and employee_salary, including duplicates.
+*/
+
+-- 2.1 Combine the first names of employees from both employee_demographics and employee_salary tables.
+
+SELECT first_name
+FROM employee_demographics
+UNION ALL
+SELECT first_name
+FROM employee_salary;
+
+-- 2.2 Retrieve all unique department names from both parks_departments and employee_salary.
+
+SELECT dept_id, NULL AS department_name
+FROM employee_salary
+UNION
+SELECT department_id, department_name
+FROM parks_departments;
+
+-- 2.3 List all employee IDs from employee_demographics and employee_salary, including duplicates.
+
+SELECT employee_id
+FROM employee_demographics
+UNION ALL
+SELECT employee_id
+FROM employee_salary;
