@@ -136,3 +136,42 @@ FROM employee_demographics;
 
 SELECT CONCAT(first_name, " ",last_name) AS full_name
 FROM employee_demographics; 
+
+-- 4 Numerical Functions.
+
+/*
+Definition:
+ROUNDS: Rounds a number to a specified number of decimal places. If no decimal places are specified, it rounds to the nearest whole number.
+FLOOR: Returns the largest integer less than or equal to the given number (rounds down).
+CEIL (or CEILING) Returns the smallest integer greater than or equal to the given number (rounds up).
+ABS: Returns the absolute (positive) value of a number.
+MOD: Returns the remainder of a division operation.
+
+ROUND	Rounds to the nearest value.
+FLOOR	Rounds down to the nearest integer
+CEIL	Rounds up to the nearest integer
+ABS	Returns the absolute value
+MOD	Returns the remainder of division
+
+Questions:
+4.1 Round all salaries in employee_salary to the nearest thousand.
+4.2 Find the absolute difference between the highest and lowest salaries.
+4.3 Retrieve the modulus of salaries divided by 5,000.
+*/
+
+-- 4.1 Round all salaries in employee_salary to the nearest thousand.
+
+SELECT ROUND(salary, 3)
+FROM employee_salary;
+
+-- 4.2 Find the absolute difference between the highest and lowest salaries.
+
+SELECT ABS(MAX(salary) - MIN(salary)) AS max_min_salary_difference
+FROM employee_salary;
+
+-- 4.3 Retrieve the modulus of salaries divided by 5,000.
+
+SELECT MOD(salary, 5000) 
+FROM employee_salary;
+
+
