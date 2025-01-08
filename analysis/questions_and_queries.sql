@@ -213,6 +213,50 @@ CASE
 END AS age_level
 FROM employee_demographics;
 
+-- 6. Subqueries (in WHERE, FROM, SELECT)
+
+/* 
+Definitions:
+Subquery in WHERE: Used to filter rows based on another query.
+Subquery in FROM: Treats the result of a subquery as a table.
+Subquery in SELECT: Calculates values dynamically for each row.
+
+Questions:
+6.1 List employees whose salaries are above the average salary of all employees.
+6.2 Retrieve the total number of employees in each department using a subquery.
+6.3 Display each employee's salary as a percentage of the highest salary.
+*/
+
+
+-- 6.1 List employees whose salaries are above the average salary of all employees.
+
+SELECT *
+FROM employee_salary
+WHERE salary > (
+	SELECT AVG(salary)
+    FROM employee_salary
+);
+
+-- 6.2 Retrieve the total number of employees in each department using a subquery.
+
+SELECT dept_id, employee_total
+FROM (
+  SELECT COUNT(first_name) AS employee_total, dept_id
+  FROM employee_salary
+  GROUP BY dept_id
+) AS agg_table;
+
+-- 6.3 Display each employee's salary as a percentage of the highest salary.
+
+SELECT first_name, last_name, salary, ((salary/
+(
+	SELECT MAX(salary) 
+    FROM employee_salary
+))*100 ) AS salary_percentage
+FROM employee_salary;
+
+
+
 
 
 
