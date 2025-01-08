@@ -255,6 +255,42 @@ SELECT first_name, last_name, salary, ((salary/
 ))*100 ) AS salary_percentage
 FROM employee_salary;
 
+-- 7. Window Functions
+
+/*
+Definitions:
+Window functions perform calculations across rows related to the current row.
+Common examples: ROW_NUMBER, RANK, DENSE_RANK, SUM (Rolling Total), AVG, etc.
+
+Questions:
+7.1 Assign a rank to employees based on their salaries, with ties receiving the same rank.
+7.2 Compute a rolling total of salaries ordered by employee_id.
+7.3 List employees with their rank and dense rank based on salary within their department.
+*/
+
+-- 7.1 Assign a rank to employees based on their salaries, with ties receiving the same rank.
+
+SELECT employee_id, last_name, salary,
+RANK() OVER(ORDER BY salary) AS rank_num
+FROM employee_salary;
+
+-- 7.2 Compute a rolling total of salaries ordered by employee_id.
+
+SELECT first_name, last_name, salary, SUM(salary)
+OVER(ORDER BY employee_id) AS rolling_salary_total
+FROM employee_salary;
+
+-- 7.3 List employees with their rank and dense rank based on salary within their department.
+
+SELECT first_name, last_name, dept_id, salary,
+RANK() OVER(PARTITION BY dept_id ORDER BY salary) AS rank_num,
+DENSE_RANK() OVER(PARTITION BY dept_id ORDER BY salary) AS dense_rank_num
+FROM employee_salary;
+
+
+
+
+
 
 
 
