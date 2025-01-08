@@ -86,3 +86,53 @@ FROM employee_demographics
 UNION ALL
 SELECT employee_id
 FROM employee_salary;
+
+-- 3 String Functions.
+
+/*
+Definitions:
+LENGTH: Returns the number of characters in a string.
+UPPER/LOWER: Converts a string to uppercase or lowercase.
+TRIM, LTRIM, RTRIM: Removes spaces or specified characters from a string.
+SUBSTRING: Extracts a portion of a string.
+REPLACE: Replaces occurrences of a substring.
+LOCATE: Finds the position of a substring in a string.
+CONCAT: Combines two or more strings.
+
+Questions:
+3.1 Convert all employee names to uppercase.
+3.2 Extract the first three characters of employee first names.
+3.3 Replace the word "Manager" with "Supervisor" in the occupation column.
+3.4 Find the position of the letter "e" in employee last names.
+3.5 Combine the first and last names into a single full name column.
+*/
+
+-- 3.1 Convert all employee names to uppercase.
+
+SELECT UPPER(first_name) AS upper_first_name, UPPER(last_name) AS upper_last_name
+FROM employee_demographics;
+
+-- 3.2 Extract the first three characters of employee first names.
+
+SELECT LEFT(first_name, 3)
+FROM employee_demographics;
+
+-- ALTERNATIVE 
+
+SELECT SUBSTRING(first_name, 1, 3)
+FROM employee_demographics;
+
+-- 3.3 Replace the word "Manager" with "Supervisor" in the occupation column.
+
+SELECT REPLACE(occupation, "Office Manager", "Office Supervisor")
+FROM employee_salary;
+
+-- 3.4 Find the position of the letter "e" in employee last names.
+
+SELECT last_name, LOCATE("e", last_name) AS e_position
+FROM employee_demographics;
+
+-- 3.5 Combine the first and last names into a single full name column.
+
+SELECT CONCAT(first_name, " ",last_name) AS full_name
+FROM employee_demographics; 
