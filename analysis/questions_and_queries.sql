@@ -174,4 +174,46 @@ FROM employee_salary;
 SELECT MOD(salary, 5000) 
 FROM employee_salary;
 
+-- 5. CASE Statements
+
+/*
+Definitions:
+CASE allows conditional logic in queries, similar to IF-ELSE statements.
+
+Questions:
+5.1 Categorize employees into salary brackets: <50k, 50k-75k, and >75k.
+5.2 Create a column indicating "Senior" for employees aged 40+ and "Junior" otherwise.
+*/
+
+-- 5.1 Categorize employees into salary brackets: <50k, 50k-60k, and >60k.
+
+SELECT first_name, last_name, salary,
+CASE
+	WHEN salary < 50000 THEN "less than 50k"
+    WHEN salary BETWEEN 50000 AND 60000 THEN "between 50k & 60k"
+    WHEN salary > 60000 THEN "greater than 60k"
+END AS salary_bracket
+FROM employee_salary;
+
+-- 5.2 Create a column indicating "Senior" for employees aged 40+ and "Junior" otherwise.
+
+SELECT *,
+CASE 
+	WHEN age > 40 THEN "Senior"
+    WHEN age <= 40 THEN "Junior"
+END AS age_level
+FROM employee_demographics;
+
+-- ALTERNATIVE
+
+SELECT *,
+CASE 
+	WHEN age > 40 THEN "Senior"
+    ELSE "Junior"
+END AS age_level
+FROM employee_demographics;
+
+
+
+
 
